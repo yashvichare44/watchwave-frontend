@@ -1,0 +1,64 @@
+<!-- movie-details.component.html -->
+
+<div class="movie-details-container">
+    <header class="movie-header">
+      <h1>{{ getMovieDetailResult?.title }}</h1>
+      <p class="tagline">{{ getMovieDetailResult?.tagline }}</p>
+      <div class="poster">
+        <img 
+          [src]="'https://image.tmdb.org/t/p/w500/' + (posterPath || '')" 
+          alt="{{ getMovieDetailResult?.title }}" 
+        />
+      </div>
+      <button (click)="toggleTrailer()" class="trailer-button">
+        {{ showTrailer ? 'Hide Trailer' : 'Show Trailer' }}
+      </button>
+    </header>
+
+    <section *ngIf="showTrailer" class="movie-trailer">
+        <h2>Trailer</h2>
+        <iframe 
+          *ngIf="getMovieVideoResult" 
+          width="560" 
+          height="315" 
+          [src]="sanitizedTrailerUrl" 
+          frameborder="0" 
+          allowfullscreen>
+        </iframe>
+      </section>
+  
+    <section class="movie-info">
+      <div class="overview">
+        <h2>Overview</h2>
+        <p>{{ getMovieDetailResult?.overview }}</p>
+      </div>
+      
+      <div class="details">
+        <h3>Details</h3>
+        <ul>
+          <li><strong>Release Date:</strong> {{ getMovieDetailResult?.releaseDate }}</li>
+          <li><strong>Runtime:</strong> {{ runtime }} minutes</li>
+          <li><strong>Genres:</strong> {{ genres }}</li>
+          <li><strong>Production Companies:</strong> {{ productionCompanies }}</li>
+          <li><strong>Production Countries:</strong> {{ productionCountries }}</li>
+        </ul>
+      </div>
+  
+      <div class="cast">
+        <h3>Cast</h3>
+        <p>{{ getMovieDetailResult?.cast }}</p>
+      </div>
+  
+      <div class="crew">
+        <h3>Crew</h3>
+        <p>{{ getMovieDetailResult?.crew }}</p>
+      </div>
+  
+      <div class="keywords">
+        <h3>Keywords</h3>
+        <p>{{ getMovieDetailResult?.keywords }}</p>
+      </div>
+    </section>
+  
+  </div>
+  
